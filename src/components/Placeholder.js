@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import '../App.css';
 import Popup from '../components/Popup';
+import store from '../store';
 class Placeholder extends Component {
   
   constructor(props){
@@ -12,8 +13,12 @@ class Placeholder extends Component {
     }
   }
   popUp =(title,image) =>{
-    alert(title);
-  	return <Popup title={title} image={image}/>
+    store.dispatch({
+         type:"GET_DATA",
+         title:title,
+         url:image,
+         display:true
+       })
   }
   componentWillMount() {
     axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=1`)
